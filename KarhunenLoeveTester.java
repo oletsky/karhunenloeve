@@ -12,17 +12,23 @@ import mathcomp.oletsky.mathhelper.VectMatr;
 
 public class KarhunenLoeveTester {
     public static void main(String[] args) {
-        double[][] matr = {
-                {0.75, 0., 0.},
-                {0., 0., 0.},
-                {0., 0., 0.25}
+        double[][] mm = {
+                {1., 2.},
+                {1., 2.}
         };
+
+        double[][] trans = VectMatr.transposeMatrix(mm);
+        double[][] matr = VectMatr.multiplyMatrices(trans,mm);
+        System.out.println("Result matrix:");
+        VectMatr.defaultOutputMatrix(matr);
+        System.out.println("------------------");
+
         EigenvalueDecomposition eig = KarhunenLoeve.getEigens(matr);
 
         System.out.println("Eigen matrix:");
         double[][] eigM1=eig.getV().getArray();
         VectMatr.defaultOutputMatrix(eigM1);
-        System.out.println("Eigen vector:");
+        System.out.println("Eigen values:");
         double[] eigVals=eig.getRealEigenvalues();
         VectMatr.defaultOutputVector(eigVals);
     }
